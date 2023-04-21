@@ -16,7 +16,7 @@ export const useJobsStore = defineStore({
       this.initialJobs = defaultData.jobs;
       this.jobs = defaultData.jobs;
       this.localisations = defaultData.localisations;
-      this.isLoading = false;
+      this.isLoading = false
     },
     async changeLocalisation(localisation) {
         this.isLoading = true;

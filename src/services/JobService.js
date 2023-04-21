@@ -1,6 +1,7 @@
 const JOBS_URL = import.meta.env.VITE_JOBS_URL;
 export const findJobs = async () => {
-    const { jobs } = await requestJobs();    
+    const { jobs } = await requestJobs();
+    console.log(formatJobs(jobs))
     return {
         jobs: formatJobs(jobs),
         localisations: retreiveAllLocalisations(jobs),
@@ -64,8 +65,30 @@ const formatJob = (job) => {
         companyName: job.company_name,
         title: job.title,
         jobType: job.job_type,
+        jobTypeTrad: formatJobTypeTrad(job.job_type),
         localisation: job.candidate_required_location,
         datePostSince: daysNumberSince
+    }
+}
+
+const formatJobTypeTrad = (type) => {
+    if (!type) {
+        return 'Other'
+    }
+
+    switch (type) {
+        case 'full_time':
+            return 'Full time';
+        case 'intership':
+            return 'Intership';
+        case 'contract':
+            return 'Contract';
+        case 'part_time':
+            return 'Part time';
+        case 'freelance':
+            return 'Freelance';
+        default:
+            return 'Other';
     }
 }
 
