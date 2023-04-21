@@ -1,4 +1,11 @@
-<script setup></script>
+<script setup>
+import { computed, onBeforeMount, onMounted, ref } from "vue";
+import {useJobsStore } from './stores/store'
+const store = useJobsStore();
+onBeforeMount(async () => {
+  await store.initJobs();
+});
+</script>
 
 <template>
   <section>
