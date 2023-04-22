@@ -1,7 +1,6 @@
 const JOBS_URL = import.meta.env.VITE_JOBS_URL;
 export const findJobs = async () => {
-    const { jobs } = await requestJobs();
-    console.log(formatJobs(jobs))
+    const jobs = await requestJobs();
     return {
         jobs: formatJobs(jobs),
         localisations: retreiveAllLocalisations(jobs),
@@ -20,6 +19,11 @@ export const filterJobs = (jobs, localisations, fullTime, search) => {
     }
 
     return filteredJobs;
+}
+
+export const getOneJob = async (id) => {
+    const job = await requestJob(id);
+    return formatJob(job, job.description);
 }
 
 const filterJobsBySearch = (jobs, search) => {
@@ -48,18 +52,23 @@ const requestJobs = async () => {
     const data = await response.json();
     return data;
 }
-
-const formatJobs = (jobs) => {
-    return jobs.map(job => formatJob(job));
+const requestJob = async (id) => {
+    const response = await fetch(`${JOBS_URL}/${id}`);
+    const data = await response.json();
+    return data;
 }
 
-const formatJob = (job) => {
+const formatJobs = (jobs) => {
+    return jobs.map(job => formatJob(job, null));
+}
+
+const formatJob = (job, description) => {
     const jobPublicationDate = job.publication_date ? new Date(job.publication_date) : null;
     const currentDate = new Date();
     const daysNumberSince = Math.floor((currentDate - jobPublicationDate) / (1000 * 60 * 60 * 24));
     return {
-        id: job.id, 
-        description: job.description,
+        id: job._id, 
+        description: description,
         url: job.url,
         companyLogo:  job.company_logo,
         companyName: job.company_name,

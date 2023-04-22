@@ -35,6 +35,13 @@ export const useJobsStore = defineStore({
       this.isLoading = true;
       this.jobs = filterJobs(this.initialJobs, this.localisations, this.fullTime, search);
       this.isLoading = false;
-    }   
+    },
+    async addJobDescription(id) {   
+      const job = this.jobs.find((j) => j.id === id);
+      if (!job.description) {
+        const jobDescription = await getOneJob(id);
+        job.description = jobDescription.description;
+      }
+    },
   },
 });
