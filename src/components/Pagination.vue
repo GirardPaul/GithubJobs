@@ -94,7 +94,7 @@ const nextPage = () => {
 
 button {
   padding: 1.2rem 1.4rem;
-  margin: 0 1.2rem;
+  margin: 0 0.5rem;
   width: 5.6rem;
   cursor: pointer;
   border: 1px solid #b7bcce;

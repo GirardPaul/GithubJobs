@@ -37,7 +37,9 @@ const changePage = (page) => {
 };
 
 onBeforeMount(async () => {
-  await store.initJobs();
+  if (!store.jobs.length) {
+    await store.initJobs();
+  }
   filteredLocalisations.value = store.localisations
     .sort((a, b) => {
       return a.isActive === b.isActive ? 0 : a.isActive ? -1 : 1;
@@ -128,7 +130,9 @@ const visitJob = async (id) => {
           <div class="flex column flex-grow ml-16">
             <p class="company-name">{{ job.companyName }}</p>
             <p class="job-title">{{ job.title }}</p>
-            <p class="job-type">{{ job.jobTypeTrad }}</p>
+            <div class="flex align-center justify-center job-type">
+              <p>{{ job.jobTypeTrad }}</p>
+            </div>
           </div>
           <div class="flex align-center align-self-end">
             <div class="flex align-center">
@@ -154,6 +158,7 @@ const visitJob = async (id) => {
 <style scoped>
 img {
   width: 12.8rem;
+  border-radius: 4px;
 }
 .job-card:hover {
   box-shadow: 0px 2px 4px rgba(0.1, 0.1, 0.1, 0.1);
@@ -163,19 +168,6 @@ img {
 }
 .ml-16 {
   margin-left: 1.6rem;
-}
-.color-grey {
-  color: #b9bdcf;
-}
-.job-description {
-  font-weight: 500;
-  font-size: 1.2rem;
-  color: #b9bdcf;
-  margin-left: 0.8rem;
-  max-width: 15rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 .company-name {
   font-weight: 700;
@@ -189,16 +181,6 @@ img {
   margin-top: 0.8rem;
   margin-bottom: 1.2rem;
 }
-.job-type {
-  font-weight: 700;
-  font-size: 1.2rem;
-  color: #334680;
-  border: 1px solid #334680;
-  border-radius: 4px;
-  padding: 0.6rem 0.8rem;
-  text-align: center;
-  width: 8rem;
-}
 .job-card {
   padding: 1.2rem;
   background: #ffffff;
@@ -211,16 +193,7 @@ img {
   gap: 3.2rem;
   grid-template-columns: repeat(1, 1fr);
 }
-.ml-12 {
-  margin-left: 1.2rem;
-}
-h3 {
-  font-weight: 700;
-  font-size: 1.4rem;
-  text-transform: uppercase;
-  color: #b9bdcf;
-  margin: 3rem 0 1.4rem 0;
-}
+
 .localisations {
   margin-top: 2.45rem;
 }
@@ -269,15 +242,6 @@ h3 {
 
 /* END INPUT CHECKBOX */
 
-section {
-  padding: 3.2rem 12rem;
-}
-
-.container {
-  display: flex;
-  margin: 4.2rem 0 19.5rem 0;
-}
-
 .header {
   padding: 4.2rem 20rem;
 
@@ -285,22 +249,10 @@ section {
   background-image: url("../assets/backgroundImg.png");
   border-radius: 8px;
 }
-.title {
-  font-size: 2.4rem;
-  font-weight: 700;
-  color: #282538;
-}
-.title span {
-  font-size: 2.4rem;
-  font-weight: 300;
-  color: #282538;
-}
+
 @media screen and (max-width: 1200px) {
   .header {
     padding: 4.2rem 10rem;
-  }
-  .container {
-    flex-direction: column;
   }
 }
 @media screen and (max-width: 950px) {
@@ -312,8 +264,14 @@ section {
   .header {
     padding: 2rem;
   }
-  section {
-    padding: 3.2rem;
+}
+
+@media screen and (max-width: 1200px) {
+  .container {
+    flex-direction: column;
+  }
+  .jobs-list {
+    margin-left: 0;
   }
 }
 </style>
