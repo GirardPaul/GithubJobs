@@ -5,6 +5,8 @@ html {
 body {
   margin: 0;
   padding: 0;
+  background: #F6F7FB;
+  overflow-y: scroll;
 }
 
 p,
@@ -41,6 +43,9 @@ textarea {
 }
 .flex-1 {
   flex: 1;
+}
+.flex-grow {
+  flex-grow: 1;
 }
 .column {
   flex-direction: column;

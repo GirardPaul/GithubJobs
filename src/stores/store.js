@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { findJobs, filterJobs } from "../services/JobService.js";
+import { findJobs, filterJobs, getOneJob } from "../services/JobService.js";
 export const useJobsStore = defineStore({
   id: "jobs",
   state: () => ({

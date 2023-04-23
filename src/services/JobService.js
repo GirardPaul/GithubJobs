@@ -9,7 +9,6 @@ export const findJobs = async () => {
 
 export const filterJobs = (jobs, localisations, fullTime, search) => {
     let filteredJobs = filterJobsByLocalisation(jobs, localisations);
-
     if (search && search.trim().length > 0) {
         filteredJobs = filterJobsBySearch(filteredJobs, search);
     }
@@ -40,10 +39,13 @@ const filterJobsByLocalisation = (jobs, localisations) => {
         return jobs;
     }
 
+
     for (const localisation of activeLocalisations) {
-        const filtered = jobs.filter(job => job.localisation === localisation);
+        const filtered = jobs.filter(job => job.localisation === localisation.id);
         filteredJobs.push(...filtered);
     }
+
+    console.log(filteredJobs);
 
     return filteredJobs;
 }

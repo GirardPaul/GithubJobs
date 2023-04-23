@@ -3,6 +3,7 @@ import SearchText from './SearchText.vue'
 import { useJobsStore } from "../stores/store";
 import { computed, onBeforeMount, onMounted, ref } from "vue";
 const store = useJobsStore();
+const searchText = ref("");
 const filterSearchText = (value) => {
   store.searchSpecific(value);
 };
@@ -12,12 +13,13 @@ const filterSearchText = (value) => {
     <div class="flex full">
       <SearchText 
         @enter="filterSearchText"
+        @changeText="searchText = $event"
         icon="work"
         placeholder="Title, companies, expertise or benefits"
       />
     </div>
 
-    <button class="btn-search pointer" @click="filterSearchText">Search</button>
+    <button class="btn-search pointer" @click="filterSearchText(searchText)">Search</button>
   </div>
 </template>
 
