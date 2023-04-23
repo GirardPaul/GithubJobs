@@ -6,6 +6,7 @@ const store = useJobsStore();
 const searchText = ref("");
 const filterSearchText = (value) => {
   store.searchSpecific(value);
+  searchText.value = "";
 };
 </script>
 <template>

@@ -14,10 +14,10 @@ export const filterJobs = (jobs, localisations, fullTime, search) => {
     }
 
     if (fullTime) {
-        return filteredJobs.filter(job => job.jobType === 'full_time');
+        filteredJobs = filteredJobs.filter(job => job.jobType === 'full_time');
     }
 
-    return filteredJobs;
+    return filteredJobs.sort((a, b) => a.datePostSince - b.datePostSince);
 }
 
 export const getOneJob = async (id) => {
@@ -61,7 +61,7 @@ const requestJob = async (id) => {
 }
 
 const formatJobs = (jobs) => {
-    return jobs.map(job => formatJob(job, null));
+    return jobs.map(job => formatJob(job, null)).sort((a, b) => a.datePostSince - b.datePostSince);
 }
 
 const formatJob = (job, description) => {
