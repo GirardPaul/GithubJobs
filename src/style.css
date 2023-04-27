@@ -155,6 +155,9 @@ h3 {
   html {
     font-size: 40%;
   }
+  section {
+    padding: 1.2rem;
+  } 
 }
 
 @media screen and (max-width: 375px) {

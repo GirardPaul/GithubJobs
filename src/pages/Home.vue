@@ -265,6 +265,15 @@ img {
     padding: 2rem;
   }
 }
+@media screen and (max-width: 576px) {
+  img {
+  width: 6rem;
+  border-radius: 4px;
+}
+.filters {
+  width: 100% !important;
+}
+}
 
 @media screen and (max-width: 1200px) {
   .container {

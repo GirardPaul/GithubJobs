@@ -49,5 +49,9 @@ span {
   color: #b9bdcf;
   width: 1.5rem !important;
 }
-
+@media screen and (max-width: 576px) {
+  .search-text {
+    margin-left: 1rem;
+  }
+}
 </style>

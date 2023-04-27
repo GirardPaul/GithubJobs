@@ -22,4 +22,11 @@ text-align: center;
 color: #B9BDCF;
 margin-bottom: 2.4rem;
 }
+
+@media screen and (max-width: 576px) {
+  p {
+   margin-bottom: 1.2rem;
+  }
+}
+
 </style>

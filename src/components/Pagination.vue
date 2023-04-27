@@ -104,6 +104,7 @@ button {
   font-weight: 400;
   font-size: 1.2rem;
   color: #b9bdcf;
+  text-align: center;
 }
 
 button[disabled] {
@@ -120,5 +121,11 @@ button.active {
   border: 1px solid #1e86ff;
   border-radius: 4px;
   color: #fff;
+}
+
+@media screen and (max-width: 576px) {
+  button {
+    width: 5rem;
+  }
 }
 </style>
